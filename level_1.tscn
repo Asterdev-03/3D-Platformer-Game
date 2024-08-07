@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://c3qwgavobo337"]
+
+[ext_resource type="PackedScene" uid="uid://by8b364otsgib" path="res://block.tscn" id="1_7sx2u"]
+[ext_resource type="PackedScene" uid="uid://c6nx2ooj6loju" path="res://player.tscn" id="1_mtvv4"]
+[ext_resource type="PackedScene" uid="uid://ddio52rg5x65g" path="res://coin.tscn" id="3_i6jqy"]
+[ext_resource type="Environment" uid="uid://bdetbwtwuyl41" path="res://Resources/level1_environment.tres" id="4_7203s"]
+[ext_resource type="PackedScene" uid="uid://gvb0hnqkuiql" path="res://path.tscn" id="5_10kb5"]
+[ext_resource type="PackedScene" uid="uid://d4jdj7kg7xoe0" path="res://vehicle.tscn" id="5_uvwho"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_833r7"]
+albedo_color = Color(0.0447533, 0.49, 0.0294, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nqrwh"]
+material = SubResource("StandardMaterial3D_833r7")
+size = Vector3(20, 0.5, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ikaxe"]
+size = Vector3(20, 0.5, 20)
+
+[node name="Level1" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.541826, 0.840491, 0, -0.840491, 0.541826, 1.32105, 11.2499, 11.4782)
+shadow_enabled = true
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.255769, 0)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_nqrwh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_ikaxe")
+
+[node name="Player" parent="." instance=ExtResource("1_mtvv4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.43231, 1.86509, 6.43793)
+
+[node name="Blocks" type="Node3D" parent="."]
+
+[node name="Block1" parent="Blocks" instance=ExtResource("1_7sx2u")]
+transform = Transform3D(0.649992, -0.759941, 0, 0.759941, 0.649992, 0, 0, 0, 1, 6.48467, 2.89359, 4.60866)
+
+[node name="Block2" parent="Blocks" instance=ExtResource("1_7sx2u")]
+transform = Transform3D(0.649992, -0.759941, 0, 0.759941, 0.649992, 0, 0, 0, 1, 3.47526, 5.88365, -0.0130342)
+
+[node name="Block3" parent="Blocks" instance=ExtResource("1_7sx2u")]
+transform = Transform3D(0.649992, -0.759941, 0, 0.759941, 0.649992, 0, 0, 0, 1, 2.6373, 2.89359, -0.0130342)
+
+[node name="Coins" type="Node3D" parent="."]
+
+[node name="Coin1" parent="Coins" instance=ExtResource("3_i6jqy")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 1.36168, 2.86367)
+
+[node name="Coin2" parent="Coins" instance=ExtResource("3_i6jqy")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.562747, 1.36168, -2.25748)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("3_i6jqy")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.71032, 2.0501, 3.90083)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("4_7203s")
+
+[node name="Path" parent="." instance=ExtResource("5_10kb5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.282485, 0)
+
+[node name="Vehicle" parent="." instance=ExtResource("5_uvwho")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -10.4494, 5.1382, -3.11772)
